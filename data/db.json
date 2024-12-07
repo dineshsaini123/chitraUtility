@@ -1,0 +1,137 @@
+{
+  "customer": [
+    {
+      "id": "1",
+      "name": "ravi krishna",
+      "area": "Chennai",
+      "creditlimit": 10000
+    },
+    {
+      "id": "2",
+      "name": "Ramesh",
+      "area": "Chennai",
+      "creditlimit": "10001"
+    }
+  ],
+  "user": [
+    {
+      "id": "adminuser",
+      "name": "admin",
+      "role": "admin",
+      "email": "admin@gmail.com",
+      "mobile": "767788989",
+      "password": "admin",
+      "address": "add1,add2",
+      "isactive": true
+    },
+    {
+      "id": "testuser",
+      "name": "Ramesh",
+      "email": "r@in.com",
+      "password": "Test@1234",
+      "mobile": "",
+      "address": "",
+      "role": "supervisor",
+      "isactive": true
+    },
+    {
+      "id": "testuser1",
+      "name": "Ravi",
+      "email": "rst@in.com",
+      "password": "test",
+      "mobile": "",
+      "address": "",
+      "role": "user",
+      "isactive": true
+    },
+    {
+      "id": "ntuser",
+      "name": "NT User",
+      "email": "nt@in.com",
+      "password": "test1234",
+      "mobile": "899900",
+      "address": "1111",
+      "role": "supervisor",
+      "isactive": true
+    },
+    {
+      "id": "dksaini",
+      "name": "dinesh kumar",
+      "email": "dineshsaini2008@gmail.com",
+      "password": "dbvv@123#",
+      "mobile": "09997314681",
+      "address": "",
+      "role": "manager",
+      "isactive": true
+    },
+    {
+      "id": "hims",
+      "name": "hims kumar",
+      "email": "himssaini2008@gmail.com",
+      "password": "123456",
+      "mobile": "09997314681",
+      "address": "",
+      "role": "user",
+      "isactive": true
+    }
+  ],
+  "role": [
+    {
+      "code": "user",
+      "name": "User",
+      "id": "e6cb"
+    },
+    {
+      "code": "manager",
+      "name": "Manager",
+      "id": "ff4d"
+    },
+    {
+      "code": "supervisor",
+      "name": "supervisor",
+      "id": "b610"
+    }
+  ],
+  "roleaccess": [
+    {
+      "role": "admin",
+      "menu": "customer",
+      "haveadd": true,
+      "haveedit": true,
+      "havedelete": true,
+      "id": "920e"
+    },
+    {
+      "role": "admin",
+      "menu": "user",
+      "haveadd": true,
+      "haveedit": true,
+      "havedelete": true,
+      "id": "5c12"
+    },
+    {
+      "role": "manager",
+      "menu": "customer",
+      "haveadd": true,
+      "haveedit": true,
+      "havedelete": false,
+      "id": "cffa"
+    },
+    {
+      "role": "supervisor",
+      "menu": "customer",
+      "haveadd": true,
+      "haveedit": false,
+      "havedelete": false,
+      "id": "a031"
+    },
+    {
+      "role": "user",
+      "menu": "customer",
+      "haveadd": false,
+      "haveedit": false,
+      "havedelete": false,
+      "id": "3ed4"
+    }
+  ]
+}
