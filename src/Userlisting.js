@@ -9,13 +9,13 @@ const Userlisting = () => {
     const [showlisting, showlistingupdate] = useState(true);
     const [rolelist, rolelistupdate] = useState([]);
 
-    const [id, idchange] = useState('');
+    const [username, idchange] = useState('');
     const [name, namechange] = useState('');
     const [role, rolechange] = useState('');
     const [email, emailchange] = useState('');
-    const [mobile, mobilechange] = useState('');
+    //const [mobile, mobilechange] = useState('');
     const [password, pwchange] = useState('');
-    const [address, addresschange] = useState('');
+    //const [address, addresschange] = useState('');
     const [isactive, activechange] = useState(false);
 
 
@@ -25,9 +25,10 @@ const Userlisting = () => {
         if(userrole !='admin'){
             navigate('/');
         }
+        
+        //console.log(userrole);
 
-
-        fetch('http://localhost:8000/user').then(res => {
+        fetch(`https://localhost:7143/api/User/GetAll`).then(res => {
             return res.json();
         }).then(resp => {
             userlistupdate(resp);
@@ -38,11 +39,17 @@ const Userlisting = () => {
 
     }, [showlisting])
 
-    const handlesubmit = (e) => {
+    
+   /* const handlesubmit = (e) => {
         e.preventDefault();
-        let userobj={id,name,email,password,mobile,address,role,isactive}
+        //let userobj={username,name,email,password,role,isactive}
+        let userobj={username,role,isactive}
 
-        fetch("http://localhost:8000/user/"+id, {
+        
+        console.log(JSON.stringify(userobj));
+        
+
+        fetch(`https://localhost:7143/api/User/updaterole`).then(res=>{  
             method:"PUT",
             headers:{"content-type":"application/json"},
             body:JSON.stringify(userobj)
@@ -52,33 +59,75 @@ const Userlisting = () => {
    
            }).catch((err) => {
                console.log(err.message)
-   
+               console.log(1)
+               
            })
+            
+           
+    };*/
 
-    };
-    const updateuser = (id) => {
+    const handlesubmit = (e) => {
+    e.preventDefault();
+
+    // Only including username, role, and isactive in the payload
+    let userobj = { username, role, isactive,email,password };
+
+    console.log(JSON.stringify(userobj));
+
+    fetch(`https://localhost:7143/api/User/updaterole`, {
+        method: "PUT", // Correct placement for the HTTP method
+        headers: {
+            "Content-Type": "application/json", // Specify content type
+        },
+        body: JSON.stringify(userobj), // Pass the user object as the request body
+    })
+        .then((res) => {
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            return res.json(); // Parse JSON response if necessary
+        })
+        .then(() => {
+            toast.success("Updated successfully.");
+            showlistingupdate(true); // Set the listing state to true
+        })
+        .catch((err) => {
+            console.error("Error:", err.message); // Log error to console
+            toast.error("Failed to update user.");
+        });
+};
+
+    
+     
+    
+    const updateuser = (username) => {
         showlistingupdate(false);
-        fetch('http://localhost:8000/user/'+id).then(res => {
+        
+        
+           
+         fetch(`https://localhost:7143/api/User/Getbycode?code=${username}`).then(res=>{  
             if(!res.ok){
                 return false;
             }
             return res.json();
         }).then(res => {
-            idchange(res.id);
+            
+            idchange(res.username);
             namechange(res.name);
             emailchange(res.email);
             pwchange(res.password);
             rolechange(res.role);
-            mobilechange(res.mobile);
-            addresschange(res.address); 
+           // mobilechange(res.mobile);
+            //addresschange(res.address); 
             activechange(res.isactive);
         }).catch((err) => {
             console.log(err.message);
-        });
+         });
 
     }
+    
     const loadrole = () => {
-        fetch('http://localhost:8000/role').then(res => {
+        fetch(`https://localhost:7143/api/UserRole/GetAllRoles`).then(res => {
             return res.json();
         }).then(resp => {
             rolelistupdate(resp);
@@ -109,14 +158,14 @@ const Userlisting = () => {
                             <tbody>
                                 {userlist &&
                                     userlist.map((item) => (
-                                        <tr key={item.id}>
-                                            <td>{item.id}</td>
+                                        <tr key={item.username}>
+                                            <td>{item.username}</td>
                                             <td>{item.name}</td>
                                             <td>{item.email}</td>
                                             <td>{item.role}</td>
                                             <td>{item.isactive === true ? 'Active' : 'InActive'}</td>
                                             <td>
-                                                <button onClick={() => { updateuser(item.id) }} className="btn btn-primary">Update</button>
+                                                <button onClick={() => { updateuser(item.username) }} className="btn btn-primary">Update</button>
                                             </td>
                                         </tr>
                                     ))

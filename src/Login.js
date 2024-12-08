@@ -67,8 +67,8 @@ const Login = () => {
           if (res.result === "pass") {
             // Check if the result is "pass"
             localStorage.setItem("username", id);
-            localStorage.setItem("message", res.message); // Optional: Store the success message
-            console.log("Login Successful:", res);
+            localStorage.setItem("userrole", res.userRole); // Optional: Store the success message
+            console.log("Login Successful:", res.userRole);
             loginapi();
             toast.success(res.message); // Display success message from the response
             navigate("/"); // Navigate to the home page
@@ -106,7 +106,7 @@ const Login = () => {
         // Check if the response was successful
         if (res.ok) {
           const data = await res.json();
-          console.log(data)
+          //console.log(data)
           if (data.token) {
             // Save token to localStorage
             localStorage.setItem("token", data.token);
@@ -120,6 +120,7 @@ const Login = () => {
         // Catch any errors in the try block
         console.error("Error in loginapi:", error);
       }
+    
     };
   };
 

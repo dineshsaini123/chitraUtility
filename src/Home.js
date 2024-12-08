@@ -17,9 +17,7 @@ const Home = () => {
 
     return (
         <div>
-            <h2>{pagetitle}</h2>
-            <h2>{obj.name}</h2>
-            <button className="btn btn-primary" onClick={() => Handleclick()}>Click Here</button>
+       
         </div>
     );
 }
