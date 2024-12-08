@@ -12,7 +12,7 @@ const Home = () => {
     const [pagehaeder, headercahnge] = useState('React JS')
     const obj = { name: 'ravi' };
     useEffect(() => {
-      //  console.log('Use Effect hook');
+       console.log('Use Effect hook');
     },[]);
 
     return (
